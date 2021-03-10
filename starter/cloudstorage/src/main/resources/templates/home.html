@@ -298,20 +298,6 @@
                 });
             });
 
-
-            function showEditCredentialsModal() {
-                $.ajax({
-                    type: "get",
-                    url: "/credential",
-                    data: $('#editCredentialForm').serialize(),
-                    success: function(result) {
-                        showCredentialModal(result.credentialId,result.url,result.username,result.password);
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {
-                        alert(xhr.status);
-                    }
-                });
-            }
         </script>
     </body>
 </html>
