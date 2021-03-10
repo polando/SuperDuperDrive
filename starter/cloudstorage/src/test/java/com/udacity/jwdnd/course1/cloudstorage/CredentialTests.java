@@ -54,16 +54,16 @@ public class CredentialTests {
     @FindBy(css="#credential-password")
     private WebElement credentialPassword;
 
-    @FindBy(xpath=".//*[@id=\"credentialTable\"]/tbody/tr/td[3]")
+    @FindBy(xpath="/html/body/div/div[2]/div[2]/div[3]/div[1]/table/tbody/tr/td[3]")
     private WebElement credentialTableUserNameField;
 
-    @FindBy(xpath=".//*[@id=\"credentialTable\"]/tbody/tr/td[2]/button")
+    @FindBy(xpath="/html/body/div/div[2]/div[2]/div[3]/div[1]/table/tbody/tr/td[2]/form/button")
     private WebElement editCredentialButton;
 
-    @FindBy(xpath=".//*[@id=\"credentialTable\"]/tbody/tr/td[1]/form/button")
+    @FindBy(xpath="/html/body/div/div[2]/div[2]/div[3]/div[1]/table/tbody/tr/td[1]/form/button")
     private WebElement deleteCredentialButton;
 
-    @FindBy(xpath=".//*[@id=\"credentialTable\"]/thead/tr/th[4]")
+    @FindBy(xpath="/html/body/div/div[2]/div[2]/div[3]/div[1]/table/thead/tr/th[4]")
     private WebElement tableHead;
 
 

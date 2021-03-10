@@ -44,7 +44,7 @@ public class NotesTests {
     @FindBy(css="#save-note-button")
     private WebElement noteSaveButton;
 
-    @FindBy(xpath=".//*[@id=\"userTable\"]/tbody/tr/th")
+    @FindBy(xpath="/html/body/div/div[2]/div[2]/div[2]/div[1]/table/tbody/tr/th")
     private WebElement noteTableRow;
 
     @FindBy(css="#note-title")
@@ -56,16 +56,16 @@ public class NotesTests {
     @FindBy(css="#save-note-button")
     private WebElement noteSave;
 
-    @FindBy(xpath=".//*[@id=\"userTable\"]/tbody/tr/td[2]/button")
+    @FindBy(xpath="/html/body/div/div[2]/div[2]/div[2]/div[1]/table/tbody/tr/td[2]/button")
     private WebElement noteEditButton;
 
-    @FindBy(xpath=".//*[@id=\"userTable\"]/tbody/tr/td[1]/form/button")
+    @FindBy(xpath="/html/body/div/div[2]/div[2]/div[2]/div[1]/table/tbody/tr/td[1]/form/button")
     private WebElement noteDeleteButton;
 
-    @FindBy(xpath=".//*[@id=\"userTable\"]/tbody/tr/th")
+    @FindBy(xpath="/html/body/div/div[2]/div[2]/div[2]/div[1]/table/tbody/tr/th")
     private WebElement noteTitleField;
 
-    @FindBy(xpath=".//*[@id=\"userTable\"]/thead")
+    @FindBy(xpath="/html/body/div/div[2]/div[2]/div[2]/div[1]/table/thead")
     private WebElement noteTableHead;
 
     private WebDriver driver;
