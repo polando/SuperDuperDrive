@@ -61,7 +61,8 @@ public class FileController {
         List<String> fileNames = userService.fileNamesForUser(userService.getCurrentUser().getUserId());
         if(multipartFile.getOriginalFilename().isBlank())
             redirAttrs.addFlashAttribute("noFile", true);
-
+        else if(multipartFile.getSize()>5242880)
+            redirAttrs.addFlashAttribute("fileTooLarge", true);
         else if (!fileNames.contains(multipartFile.getOriginalFilename())){
             redirAttrs.addFlashAttribute("fileUploadSuccess", true);
             fileStorageService.save(multipartFile);}

@@ -17,30 +17,43 @@
             </div>
             <div id="contentDiv" style="clear: right;">
                 <div id="returnMessages">
-                    <div class="alert alert-dark" th:if="${noteChangeSuccess}">
+                    <div class="alert alert-success" th:if="${noteChangeSuccess}">
                         Note was saved successfully
                     </div>
-                    <div class="alert alert-dark" th:if="${noteRemoveSuccess}">
+                    <div class="alert alert-success" th:if="${noteRemoveSuccess}">
                         Note was removed successfully
                     </div>
-                    <div class="alert alert-dark" th:if="${credentialChangeSuccess}">
+                    <div class="alert alert-success" th:if="${credentialChangeSuccess}">
                         Credential was saved successfully
                     </div>
-                    <div class="alert alert-dark" th:if="${credentialRemoveSuccess}">
+                    <div class="alert alert-success" th:if="${credentialRemoveSuccess}">
                         Credential was removed successfully
                     </div>
-                    <div class="alert alert-dark" th:if="${fileUploadSuccess}">
+                    <div class="alert alert-success" th:if="${fileUploadSuccess}">
                         File was uploaded successfully
                     </div>
-                    <div class="alert alert-dark" th:if="${fileRemoveSuccess}">
+                    <div class="alert alert-success" th:if="${fileRemoveSuccess}">
                         File was removed successfully
                     </div>
-                    <div class="alert alert-dark" th:if="${duplicateFileName}">
+                    <div class="alert alert-danger" th:if="${duplicateFileName}">
                         File name was already used
                     </div>
-                    <div class="alert alert-dark" th:if="${noFile}">
+                    <div class="alert alert-danger" th:if="${noFile}">
                         A file must be selected
                     </div>
+                    <div class="alert alert-danger" th:if="${fileTooLarge}">
+                        File is too large
+                    </div>
+                    <div class="alert alert-danger" th:if="${notDescTooLarge}">
+                        Note description is too large
+                    </div>
+                    <div class="alert alert-danger" th:if="${noteTitleDuplicate}">
+                        Note title already exist
+                    </div>
+                    <div class="alert alert-danger" th:if="${credentialsUsernameDuplicate}">
+                        Credential username already exist
+                    </div>
+
 
                 </div>
                 <nav style="clear: right;">
@@ -189,17 +202,16 @@
                                         </form>
                                     </td>
                                     <td>
-                                        <form th:action="@{/credential}" th:object="${credential}" th:method="get" id="editCredentialForm">
-                                            <input type="hidden" th:value="${credential.credentialId}" name="credentialId">
+                                        <form th:action="@{/credential}" th:object="${credential}" th:id="editCredentialForm" >
+                                            <input type="hidden" th:value="*{credentialId}" name="credentialId">
+                                            <button style="margin: 0.25em;"  class="btn btn-success" type="submit">edit</button>
                                         </form>
-                                        <button style="margin: 0.25em;"  class="btn btn-success" onclick="showEditCredentialsModal()" type="button">
-                                            edit
-                                        </button>
                                     </td>
 
                                     <th scope="row" th:text="${credential.url}" />
                                     <td th:text="${credential.username}"/>
                                     <td th:text="${credential.password}"/>
+
                                 </tr>
                                 </tbody>
                             </table>
@@ -269,7 +281,24 @@
             }
         </script>
 
+
         <script  th:inline="javascript">
+            $( "#editCredentialForm" ).submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "get",
+                    url: "/credential",
+                    data: $('#editCredentialForm').serialize(),
+                    success: function(result) {
+                        showCredentialModal(result.credentialId,result.url,result.username,result.password);
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                    }
+                });
+            });
+
+
             function showEditCredentialsModal() {
                 $.ajax({
                     type: "get",
