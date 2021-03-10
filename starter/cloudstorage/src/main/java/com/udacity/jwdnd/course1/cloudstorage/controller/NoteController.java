@@ -35,7 +35,9 @@ public class NoteController {
     @PostMapping
     public RedirectView addOrEditNote(Note note, RedirectAttributes redirectAttributes){
         List<String> noteTitles = userService.getUserNotes(userService.getCurrentUser().getUserId())
-                .stream().map(Note::getNoteTitle)
+                .stream()
+                .filter(item -> !item.getNoteId().equals(note.getNoteId()))
+                .map(Note::getNoteTitle)
                 .collect(Collectors.toList());
         if(noteTitles.contains(note.getNoteTitle())){
             redirectAttributes.addFlashAttribute("noteTitleDuplicate", true);

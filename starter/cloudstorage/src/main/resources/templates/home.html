@@ -202,7 +202,7 @@
                                         </form>
                                     </td>
                                     <td>
-                                        <form th:action="@{/credential}" th:object="${credential}" th:id="editCredentialForm" >
+                                        <form th:action="@{/credential}" th:object="${credential}" th:id="'editCredentialForm' + ${credential.credentialId}" >
                                             <input type="hidden" th:value="*{credentialId}" name="credentialId">
                                             <button style="margin: 0.25em;"  class="btn btn-success" type="submit">edit</button>
                                         </form>
@@ -283,12 +283,12 @@
 
 
         <script  th:inline="javascript">
-            $( "#editCredentialForm" ).submit(function(e) {
+            $( "form[id*='editCredentialForm']" ).submit(function(e) {
                 e.preventDefault();
                 $.ajax({
                     type: "get",
                     url: "/credential",
-                    data: $('#editCredentialForm').serialize(),
+                    data: $(this).serialize(),
                     success: function(result) {
                         showCredentialModal(result.credentialId,result.url,result.username,result.password);
                     },
